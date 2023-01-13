@@ -92,13 +92,13 @@ void input_to_file(){
             cout<<"Name : ";    cin>>group[count].name;
             cout<<"Marks : ";   cin>>group[count].marks;
 
-            z<<"#"<<i+1<<endl;
+            z<<"-------------------------------------------------------"<<endl;
             z<<group[count].id<<endl<<group[count].name<<endl<<group[count].marks<<endl;
              count++;
         }
         z.close();
     }else{
-        cout<<"File Creating was Not Successfully";
+        cout<<"File Creating was Not Successfully"<<endl;
     }
 }
 
@@ -106,7 +106,6 @@ void get_data_of_file(){
     ifstream z;
     z.open("C://Users//Tajer//Desktop//CLion Codes//C++ Course//Projects - 1 File//Files//StudentReport.txt",ios::in);
     if(z.is_open()){
-        Student s;
         int c=1;
         count-0;
         cout<<"s.number\tid\t\tname\t\t   marks\t\t\t"<<endl;
