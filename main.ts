@@ -21,5 +21,6 @@ class Student extends Person {
     }
 }
 const person = new Person("Kamran", "Tajerbashi", "KamranTajerbashi@gmail.com"); // OK, because we're assigning
-
-console.log("Result Model : ", person);
+const student = new Student("Kaihan","Yousofzai");
+console.log("Result Model Person : ", person);
+console.log("Result Model Student : ", student);
