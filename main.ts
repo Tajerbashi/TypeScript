@@ -1,14 +1,25 @@
-export {}
+export { }
 interface IPerson {
+    GetInfo: () => string
 }
-class Person {
+class Person implements IPerson {
 
-    public constructor(private name : string) 
-    {
+    public constructor(
+        protected readonly name: string,
+        protected readonly family: string,
+        protected readonly email: string) { }
+    public GetInfo(): string {
+        return (`${this.name} - ${this.family} - ${this.email}`);
     }
-    public GetName() : string { return this.name; }
 }
+class Student extends Person {
+    /**
+     *
+     */
+    public constructor(name:string,family:string) {
+        super(name,family,"");
+    }
+}
+const person = new Person("Kamran", "Tajerbashi", "KamranTajerbashi@gmail.com"); // OK, because we're assigning
 
-const person = new Person("Tajer"); // OK, because we're assigning
-
-person.GetName();
+console.log("Result Model : ", person);
