@@ -1,33 +1,14 @@
-enum Color {
-  BLUE,
-  GREEN,
-  RED,
-  BLACK,
+type Combine = string | number | boolean;
+function Logger(value: Combine): void {
+  console.log("Result ", value);
 }
 
-const product: {
-  name: string;
-  price: number;
-  discount: string[];
-  color: Color;
-  model: [number, string];
-} = {
-  name: "Phone",
-  price: 9900,
-  discount: ["smr", "atm"],
-  color: Color.BLACK,
-  model: [2014, "toyta"],
-};
+function add(input1: number, input2: number): number {
+  Logger(input1 + input2);
+  return input1 + input2;
+}
+let funCombine: (input1: number, input2: number) => number;
 
-console.log("Product 1: ", product.color == Color.BLACK);
-console.log("Product 2: ", product.color == Color.BLUE);
-console.log("=======================");
-var Calculator = {
-  Sum: (input1: number | string, input2: number, string) => {
-    if (typeof input1 === "number" && typeof input2 === "number") {
-      return input1 + input2;
-    } else {
-      return input1.toString() + input2.toString();
-    }
-  },
-};
+funCombine = add;
+
+funCombine(1, 2);
