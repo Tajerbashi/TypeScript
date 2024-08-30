@@ -1,4 +1,8 @@
-const CalbackFunc = (input1: number, input2: number, cb) => {
+const CalbackFunc = (
+  input1: number,
+  input2: number,
+  cb: (value: number) => void
+) => {
   const result = input1 + input2;
   cb(result);
 };
