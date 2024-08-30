@@ -1,0 +1,19 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lite-server": "^2.6.1",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
