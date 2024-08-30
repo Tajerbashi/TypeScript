@@ -1,80 +1,91 @@
-interface IBaseEntity {
-  Id: number;
-  Title: string;
+enum MessageType {
+  SMS,
+  Email,
+  Gmail,
+  IMessage,
 }
-class Product implements IBaseEntity {
-  Id: number;
-  Title: string;
 
-  constructor(Id: number, name: string) {
-    this.Id = Id;
-    this.Title = name;
+interface ISendProvider {
+  Send(): void;
+}
+class SendProvider implements ISendProvider {
+  private type: MessageType;
+  constructor(Type: MessageType) {
+    this.type = Type;
   }
-}
-interface IDropDown {
-  Title: string;
-  Value: number;
-}
-class DropDown implements IDropDown {
-  Title: string;
-  Value: number;
-  constructor(Title: string, Value: number) {
-    this.Title = Title;
-    this.Value = Value;
-  }
-}
-
-abstract class BaseService<TEntity extends IBaseEntity> {
-  private DataList: TEntity[] = [];
-
-  constructor() {}
-
-  Create = (TEntity: TEntity): void => {
-    this.DataList.push(TEntity);
-  };
-
-  Update = (TEntity: TEntity): number => {
-    const index = this.DataList.findIndex((item) => item.Id === TEntity.Id);
-    if (index !== -1) {
-      this.DataList[index] = TEntity;
-    } else {
-      this.DataList.push(TEntity);
+  Send(): void {
+    switch (this.type) {
+      case MessageType.SMS:
+        var service = SendMessage.getInstance();
+        service.Send();
+        break;
+      case MessageType.Email:
+        var service = SendEmail.getInstance();
+        service.Send();
+        break;
+      case MessageType.Gmail:
+        var service = SendGmail.getInstance();
+        service.Send();
+        break;
+      case MessageType.IMessage:
+        var service = SendMessage.getInstance();
+        service.Send();
+        break;
+      default:
+        console.log("Default ....");
+        break;
     }
-    return TEntity.Id;
-  };
-
-  Delete = (TEntity: TEntity): void => {
-    this.DataList = this.DataList.filter((item) => item.Id !== TEntity.Id);
-  };
-
-  Get = (id: number): TEntity | undefined => {
-    return this.DataList.find((item) => item.Id === id);
-  };
-  GetAll = (): TEntity[] | undefined => {
-    return this.DataList;
-  };
-
-  GetDropDown = (): DropDown[] => {
-    return this.DataList.map((item) => new DropDown(item.Title, item.Id));
-  };
+  }
 }
 
-class ProductService extends BaseService<Product> {}
+class SendMessage implements ISendProvider {
+  private static instance: SendMessage;
+  private constructor() {}
+  static getInstance = () => {
+    if (this.instance) return this.instance;
+    this.instance = new SendMessage();
+    return this.instance;
+  };
+  Send(): void {
+    console.log("Send SMS => ");
+  }
+}
+class SendEmail implements ISendProvider {
+  private static instance: SendEmail;
+  private constructor() {}
+  static getInstance = () => {
+    if (this.instance) return this.instance;
+    this.instance = new SendEmail();
+    return this.instance;
+  };
+  Send(): void {
+    console.log("Send Email => ");
+  }
+}
+class SendGmail implements ISendProvider {
+  private static instance: SendGmail;
+  private constructor() {}
+  static getInstance = () => {
+    if (this.instance) return this.instance;
+    this.instance = new SendGmail();
+    return this.instance;
+  };
+  Send(): void {
+    console.log("Send Gmail => ");
+  }
+}
+class SendIMessage implements ISendProvider {
+  private static instance: SendIMessage;
+  private constructor() {}
+  static getInstance = () => {
+    if (this.instance) return this.instance;
+    this.instance = new SendIMessage();
+    return this.instance;
+  };
+  Send(): void {
+    console.log("Send IMessage => ");
+  }
+}
 
-const productService = new ProductService();
-productService.Create(new Product(1, "Product A"));
-productService.Create(new Product(2, "Product B"));
-productService.Create(new Product(3, "Product C"));
-productService.Create(new Product(4, "Product D"));
-productService.Create(new Product(5, "Product E"));
-productService.Create(new Product(6, "Product F"));
-productService.Create(new Product(7, "Product G"));
-productService.Create(new Product(8, "Product I"));
-productService.Create(new Product(9, "Product J"));
-productService.Create(new Product(10, "Product K"));
-
-const product = productService.Get(1); // Gets the product with Id 1
-productService.Update(new Product(1, "Updated Product A")); // Updates product with Id 1
-productService.Delete(new Product(2, "Product B")); // Deletes product with Id 2
-
-console.log(productService.GetDropDown());
+var provider = new SendProvider(MessageType.SMS);
+provider.Send();
