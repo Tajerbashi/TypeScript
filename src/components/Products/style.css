@@ -1,0 +1,4 @@
+#card-product-img:hover {
+  box-shadow: 0 0 20px 0px #4f4f4f !important;
+  cursor: pointer;
+}
