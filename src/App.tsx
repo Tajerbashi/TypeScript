@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
-
-import { CartProvider, userCartContext } from "./context/CartContext";
-
+import { CartProvider } from "./context/CartContext";
 import ReactContent from "./components/HOC/ReactContent";
 import HomePage from "./pages/template/home/HomePage";
 import ProductsPage from "./pages/shop/products/ProductsPage";
@@ -14,7 +12,13 @@ const App = () => {
     <CartProvider>
       <ReactContent>
         <NavbarComponent />
-        <Container>
+        <Container
+          style={{
+            marginTop: "90px",
+            height: "100%",
+          }}
+          fluid
+        >
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductsPage />} />

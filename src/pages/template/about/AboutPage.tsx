@@ -1,10 +1,10 @@
-import ReactContent from "../../../components/HOC/ReactContent";
+import { TKCard, TKCardContent } from "../../../components/Card/TKCard";
 
 const AboutPage = () => {
   return (
-    <ReactContent>
-      <div>About Page</div>
-    </ReactContent>
+    <TKCard>
+      <TKCardContent>About Page</TKCardContent>
+    </TKCard>
   );
 };
 

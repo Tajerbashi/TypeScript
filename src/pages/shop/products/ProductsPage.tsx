@@ -4,7 +4,7 @@ import productItems from "../../../data/products.json";
 import Product from "../../../components/Products/Product";
 const ProductsPage = () => {
   return (
-    <ReactContent>
+    <ReactContent className="mt-5">
       <Row md={2} xs={1} lg={3} className="g-3 justify-content-center">
         {productItems.map((item) => (
           <Col key={item.id}>

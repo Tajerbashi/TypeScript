@@ -1,13 +1,24 @@
-import ReactContent from "../HOC/ReactContent";
-import { Container, Navbar, Nav, Button, Badge } from "react-bootstrap";
+import { useState, useRef } from "react";
 import { NavLink } from "react-router-dom";
+import {
+  Container,
+  Navbar,
+  Nav,
+  Button,
+  Badge,
+  Overlay,
+  Tooltip,
+} from "react-bootstrap";
+import ReactContent from "../HOC/ReactContent";
 import { useCartContext } from "../../context/CartContext";
 
 const NavbarComponent = () => {
-  const { cartQty } = useCartContext();
+  const { cartQty, openCart, closeCart } = useCartContext();
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
   return (
     <ReactContent>
-      <Navbar className="navbar bg-dark bg-bg-gradient rounded text-light mb-2 shadow">
+      <Navbar className="navbar bg-dark bg-bg-gradient rounded text-light mb-2 shadow fixed-top m-3">
         <Container fluid>
           <Nav className="">
             <Nav.Link to="/" as={NavLink} className="text-light">
@@ -24,6 +35,11 @@ const NavbarComponent = () => {
             </Nav.Link>
           </Nav>
           <Button
+            ref={target}
+            onClick={() => {
+              setShow(!show);
+              openCart();
+            }}
             className="bg-dark btn-outline-light"
             style={{
               width: "3rem",
@@ -36,22 +52,14 @@ const NavbarComponent = () => {
             <Badge bg="light" text="dark">
               {cartQty}
             </Badge>
-            {/* <div
-              className="bg-light text-black d-flex justify-content-center align-items-center p-2 rounded-5 shadow"
-              style={{
-                color: "white",
-                width: "1.2rem",
-                height: "1.2rem",
-                position: "absolute",
-                fontSize: "1.2rem",
-                bottom: 0,
-                right: 0,
-                transform: "translate(25%,25%)",
-              }}
-            >
-              {cartQty}
-            </div> */}
           </Button>
+          <Overlay target={target.current} show={show} placement="left">
+            {(props) => (
+              <Tooltip id="overlay-example" {...props}>
+                سبد خرید
+              </Tooltip>
+            )}
+          </Overlay>
         </Container>
       </Navbar>
     </ReactContent>

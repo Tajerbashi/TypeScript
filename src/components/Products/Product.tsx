@@ -1,8 +1,8 @@
-import ReactContent from "../HOC/ReactContent";
-
+import "./style.css";
 import { useCartContext } from "../../context/CartContext";
-
+import ReactContent from "../HOC/ReactContent";
 import { Button, Card } from "react-bootstrap";
+
 type ProductProps = {
   id: number;
   title: string;
@@ -18,8 +18,9 @@ const Product = ({ id, title, price, imgUrl, description }: ProductProps) => {
 
   return (
     <ReactContent>
-      <Card className="shadow mt-5 h-100">
+      <Card id="card-product-img" className="parent shadow mt-5 h-100">
         <Card.Img
+          className="child"
           variant="top"
           src={imgUrl}
           height={"200px"}
@@ -73,7 +74,7 @@ const Product = ({ id, title, price, imgUrl, description }: ProductProps) => {
             )}
           </div>
           <Card.Footer>
-            <text className="text-light">{description}</text>
+            <p className="text-light">{description}</p>
           </Card.Footer>
         </Card.Body>
       </Card>
